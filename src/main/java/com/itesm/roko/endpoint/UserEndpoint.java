@@ -5,6 +5,7 @@ import com.itesm.roko.domain.User;
 import com.itesm.roko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,18 +16,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@Path("/v1")
+@RequestMapping("v1")
 public class UserEndpoint {
 
     @Autowired
     private UserService userService;
 
     @GET
-    @Path("/user")
+    @RequestMapping("/user")
     public Response search(){
         Optional<List<User>>users =  userService.list();
+        System.out.println(users.isPresent());
+        List<User>users1 = users.get();
+        System.out.println(users1.size());
+        System.out.println("username = "+users1.get(0).getUsername());
         Response response;
-        if ( users.isPresent()){
+        if (users.isPresent()){
             response = Response.ok(users.get()).build();
         }else{
             response = Response.noContent().build();
