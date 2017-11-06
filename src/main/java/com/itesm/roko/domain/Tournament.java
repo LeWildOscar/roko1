@@ -38,7 +38,7 @@ public class Tournament {
 
     private Date on_updates;
 
-    private int prize;
+    private int prize_id;
 
     public int getId() {
         return id;
@@ -176,11 +176,11 @@ public class Tournament {
         this.on_updates = on_updates;
     }
 
-    public int getPrize() {
-        return prize;
+    public int getPrize_id() {
+        return prize_id;
     }
 
-    public void setPrize(int prize) {
-        this.prize = prize;
+    public void setPrize_id(int prize_id) {
+        this.prize_id = prize_id;
     }
 }

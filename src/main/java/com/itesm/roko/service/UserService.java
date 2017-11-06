@@ -17,4 +17,16 @@ public class UserService {
     public Optional<List<User>> list(){
         return userDAO.list();
     }
+
+    public Optional<User>insert(User user){
+        return userDAO.insert(user);
+    }
+
+    public Optional<User> getUser(){
+        //acá se mandaría a llamar el DAO
+        User user = new User();
+        user.setUsername("Nombre");
+        user.setCountry("Apellido");
+        return Optional.of(user);
+    }
 }
