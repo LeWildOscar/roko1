@@ -1,7 +1,7 @@
 package com.itesm.roko.service;
 
-import com.itesm.roko.dao.UserDAO;
-import com.itesm.roko.domain.User;
+import com.itesm.roko.model.dao.UserDAO;
+import com.itesm.roko.model.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,18 +1,23 @@
-package com.itesm.roko.domain;
+package com.itesm.roko.model.domain;
 
 import java.util.Date;
 
-public class User_friend {
+public class League {
 
     private int id;
 
     private String uuid;
 
+    private String name;
+
+    private String sport_name;
+
+    private String country;
+
     private Date on_created;
 
     private Date on_updated;
 
-    private int user_id;
 
     public int getId() {
         return id;
@@ -30,6 +35,30 @@ public class User_friend {
         this.uuid = uuid;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSport_name() {
+        return sport_name;
+    }
+
+    public void setSport_name(String sport_name) {
+        this.sport_name = sport_name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public Date getOn_created() {
         return on_created;
     }
@@ -44,13 +73,5 @@ public class User_friend {
 
     public void setOn_updated(Date on_updated) {
         this.on_updated = on_updated;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 }

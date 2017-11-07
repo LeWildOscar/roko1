@@ -1,4 +1,4 @@
-package com.itesm.roko.domain;
+package com.itesm.roko.model.domain;
 
 import java.util.Date;
 

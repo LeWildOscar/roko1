@@ -1,8 +1,8 @@
-package com.itesm.roko.domain;
+package com.itesm.roko.model.domain;
 
 import java.util.Date;
 
-public class League {
+public class Team {
 
     private int id;
 
@@ -10,14 +10,15 @@ public class League {
 
     private String name;
 
-    private String sport_name;
+    private String color;
 
     private String country;
+
+    private String logo;
 
     private Date on_created;
 
     private Date on_updated;
-
 
     public int getId() {
         return id;
@@ -43,12 +44,12 @@ public class League {
         this.name = name;
     }
 
-    public String getSport_name() {
-        return sport_name;
+    public String getColor() {
+        return color;
     }
 
-    public void setSport_name(String sport_name) {
-        this.sport_name = sport_name;
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getCountry() {
@@ -57,6 +58,14 @@ public class League {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public Date getOn_created() {

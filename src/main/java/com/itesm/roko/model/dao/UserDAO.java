@@ -1,4 +1,4 @@
-package com.itesm.roko.dao;
+package com.itesm.roko.model.dao;
 
 
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.itesm.roko.domain.User;
+import com.itesm.roko.model.domain.User;
 
 import java.util.List;
 import java.util.Optional;

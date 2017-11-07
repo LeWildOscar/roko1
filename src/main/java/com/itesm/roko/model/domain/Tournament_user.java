@@ -1,24 +1,28 @@
-package com.itesm.roko.domain;
+package com.itesm.roko.model.domain;
 
 import java.util.Date;
 
-public class Tournament_matchday {
+public class Tournament_user {
 
     private int id;
 
     private String uuid;
 
-    private Date start;
+    private int is_admin;
 
-    private Date end;
+    private int position;
 
-    private int number;
+    private int is_winner;
+
+    private int prize_amount;
 
     private Date on_created;
 
     private Date on_updated;
 
     private int tournament_id;
+
+    private int user_id;
 
     public int getId() {
         return id;
@@ -36,28 +40,36 @@ public class Tournament_matchday {
         this.uuid = uuid;
     }
 
-    public Date getStart() {
-        return start;
+    public int getIs_admin() {
+        return is_admin;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
     }
 
-    public Date getEnd() {
-        return end;
+    public int getPosition() {
+        return position;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
-    public int getNumber() {
-        return number;
+    public int getIs_winner() {
+        return is_winner;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setIs_winner(int is_winner) {
+        this.is_winner = is_winner;
+    }
+
+    public int getPrize_amount() {
+        return prize_amount;
+    }
+
+    public void setPrize_amount(int prize_amount) {
+        this.prize_amount = prize_amount;
     }
 
     public Date getOn_created() {
@@ -82,5 +94,13 @@ public class Tournament_matchday {
 
     public void setTournament_id(int tournament_id) {
         this.tournament_id = tournament_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

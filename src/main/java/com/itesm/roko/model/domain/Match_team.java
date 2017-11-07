@@ -1,20 +1,24 @@
-package com.itesm.roko.domain;
+package com.itesm.roko.model.domain;
 
 import java.util.Date;
 
-public class User_team {
+public class Match_team {
 
     private int id;
 
     private String uuid;
 
+    private int is_local;
+
+    private int is_winner;
+
     private Date on_created;
 
     private Date on_updated;
 
-    private int user_id;
-
     private int team_id;
+
+    private int match_id;
 
     public int getId() {
         return id;
@@ -30,6 +34,22 @@ public class User_team {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public int getIs_local() {
+        return is_local;
+    }
+
+    public void setIs_local(int is_local) {
+        this.is_local = is_local;
+    }
+
+    public int getIs_winner() {
+        return is_winner;
+    }
+
+    public void setIs_winner(int is_winner) {
+        this.is_winner = is_winner;
     }
 
     public Date getOn_created() {
@@ -48,19 +68,19 @@ public class User_team {
         this.on_updated = on_updated;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public int getTeam_id() {
         return team_id;
     }
 
     public void setTeam_id(int team_id) {
         this.team_id = team_id;
+    }
+
+    public int getMatch_id() {
+        return match_id;
+    }
+
+    public void setMatch_id(int match_id) {
+        this.match_id = match_id;
     }
 }

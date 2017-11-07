@@ -1,7 +1,7 @@
 package com.itesm.roko.endpoint;
 
 
-import com.itesm.roko.domain.User;
+import com.itesm.roko.model.domain.User;
 import com.itesm.roko.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

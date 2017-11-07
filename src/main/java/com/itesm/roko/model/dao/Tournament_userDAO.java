@@ -1,16 +1,13 @@
-package com.itesm.roko.dao;
+package com.itesm.roko.model.dao;
 
-import com.itesm.roko.domain.Tournament;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.itesm.roko.domain.Tournament_user;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.itesm.roko.model.domain.Tournament_user;
 
 import java.util.List;
 import java.util.Optional;
