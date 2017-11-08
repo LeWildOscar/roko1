@@ -15,6 +15,7 @@ public class UserService {
     private UserDAO userDAO;
 
     public Optional<List<User>> list(){
+
         return userDAO.list();
     }
 

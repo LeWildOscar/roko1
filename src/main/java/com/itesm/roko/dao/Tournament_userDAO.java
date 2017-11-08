@@ -38,12 +38,18 @@ public class Tournament_userDAO {
         return Optional.empty();
     }
 
-    /*public Optional<Tournament_user>insert(Tournament tournament){
+    public Optional<Tournament_user>insert(Tournament_user tournament_user){
         String newUUid = UUID.randomUUID().toString();
         try{
             jdbcTemplate.update(
-                    "INSERT INTO tournament_user()"
-            )
+                    "INSERT INTO tournament_user(uuid, is_admin, position, is_winner, prize_amount, on_created, on_updated, tournament_id, user_id )",
+                    newUUid, tournament_user.getIs_admin(),tournament_user.getPosition(), tournament_user.getIs_winner(), tournament_user.getPrize_amount(),
+                    tournament_user.getOn_created(), tournament_user.getOn_updated(), tournament_user.getTournament_id(), tournament_user.getUser_id()
+            );
+            return getByUuid(newUUid);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Optional.empty();
         }
-    }*/
+    }
 }

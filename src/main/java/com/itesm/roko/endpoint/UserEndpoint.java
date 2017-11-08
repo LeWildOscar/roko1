@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@RestController
-@RequestMapping("v1")
+@Path("/v1")
+//@RequestMapping("v1")
 @Produces(MediaType.APPLICATION_JSON)
 
 public class UserEndpoint {
@@ -27,16 +27,19 @@ public class UserEndpoint {
     private UserService userService;
 
     @GET
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public  Response search(){
+    //@RequestMapping(value = "/user", method = RequestMethod.GET)
+    @Path("/user")
+    public  ResponseEntity<List<User>> search(){
         Optional<List<User>>users =  userService.list();
         Response response;
         if (users.isPresent()){
             response = Response.ok(users.get()).build();
+
         }else{
             response = Response.noContent().build();
         }
-        return response;
+
+        return new ResponseEntity<List<User>>(users.get(), HttpStatus.OK);
     }
 
     @POST

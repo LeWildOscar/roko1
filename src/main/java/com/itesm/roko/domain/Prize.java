@@ -8,11 +8,15 @@ public class Prize {
 
     private String uuid;
 
+    private String name;
+
+    private int points;
+
+    private String type;
+
     private Date on_created;
 
     private Date on_updated;
-
-    private int tournament_match_id;
 
     public int getId() {
         return id;
@@ -30,6 +34,30 @@ public class Prize {
         this.uuid = uuid;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Date getOn_created() {
         return on_created;
     }
@@ -44,13 +72,5 @@ public class Prize {
 
     public void setOn_updated(Date on_updated) {
         this.on_updated = on_updated;
-    }
-
-    public int getTournament_match_id() {
-        return tournament_match_id;
-    }
-
-    public void setTournament_match_id(int tournament_match_id) {
-        this.tournament_match_id = tournament_match_id;
     }
 }

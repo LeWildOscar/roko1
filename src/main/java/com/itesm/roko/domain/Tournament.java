@@ -40,6 +40,8 @@ public class Tournament {
 
     private int prize_id;
 
+    private String prize_uuid; //---------------------- :)
+
     public int getId() {
         return id;
     }

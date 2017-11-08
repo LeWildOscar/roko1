@@ -37,7 +37,7 @@ public class TournamentDAO {
         return Optional.empty();
     }
 
-    public Optional<Tournament>insert(Tournament tournament){
+    public Optional<Tournament> insert(Tournament tournament){
         String newUuid = UUID.randomUUID().toString();
         try{
             jdbcTemplate.update(
@@ -53,5 +53,20 @@ public class TournamentDAO {
             e.printStackTrace();
             return Optional.empty();
         }
+    }
+
+    public Optional<List<Tournament>>list(){
+        String sql = "SELECT * FROM tournament";
+        try{
+            List<Tournament>tournaments= jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Tournament.class));
+            logger.debug("Jalando lista de tournaments");
+            return Optional.of(tournaments);
+        }catch (EmptyResultDataAccessException e){
+            e.printStackTrace();
+            logger.debug("No habia nada alv");
+
+        }
+        return Optional.empty();
     }
 }
