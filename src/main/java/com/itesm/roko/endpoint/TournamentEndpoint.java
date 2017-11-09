@@ -18,21 +18,32 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@RestController
-@RequestMapping("v1")
+@Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 public class TournamentEndpoint {
 
     @Autowired
     private TournamentService tournamentService;
 
-    //@POST
-    @RequestMapping(value = "/tournament", method = RequestMethod.POST)
+    @POST
+    @Path("/tournament")
     public ResponseEntity<Tournament> insert(@RequestBody Tournament tournament){
 
         Optional<Tournament>tournamentDB = tournamentService.insert(tournament);
 
         return new ResponseEntity<Tournament>(tournamentDB.get(), HttpStatus.OK);
+    }
+    @GET
+    @Path("/tournaments")
+    public Response list(){
+        Optional<List<Tournament>>tournaments = tournamentService.list();
+        Response response;
+        if(tournaments.isPresent()){
+            response = Response.ok(tournaments.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
     }
 
 

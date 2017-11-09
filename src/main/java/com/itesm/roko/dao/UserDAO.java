@@ -38,6 +38,34 @@ public class UserDAO {
         return Optional.empty();
     }
 
+    public Optional<User> getByUsername(String username){
+        String sql = "SELECT * FROM user WHERE username = ?";
+        try {
+            BeanPropertyRowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+            User user = jdbcTemplate.queryForObject(sql, rowMapper, username);
+            logger.debug("Getting usuario con username: " + username);
+            return Optional.of(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug("No se encontro usuario con username: "+username);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<User> update(User user){
+        try {
+            jdbcTemplate.update("UPDATE user SET " +
+                            "password=? WHERE uuid=?",
+                    user.getPassword(), user.getUuid());
+            logger.debug("Updating user: " + user.getUuid());
+            return getByUuid(user.getUuid());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("Could not update user: " + user.getUuid());
+            return Optional.empty();
+        }
+    }
+
     public Optional<User> insert(User user){
         String newUuid = UUID.randomUUID().toString();
         try{
@@ -49,6 +77,18 @@ public class UserDAO {
         }catch (Exception e){
             e.printStackTrace();
             logger.debug("Could not insert user");
+            return Optional.empty();
+        }
+    }
+
+    public Optional<User> delete(User user){
+        try{
+            jdbcTemplate.update(
+                    "DELETE FROM user WHERE uuid=?",user.getUuid()
+            );
+            return Optional.of(user);
+        }catch (Exception e){
+            e.printStackTrace();
             return Optional.empty();
         }
     }
@@ -67,6 +107,22 @@ public class UserDAO {
         }
         return Optional.empty();
     }
+    /*
+    public Optional<User> update(User user){
+        try {
+            jdbcTemplate.update("UPDATE user SET " +
+                            "password=? WHERE uuid=?",
+                    user.getName(), user.getLastname(), user.getStatus(),
+                    Timestamp.from(Instant.now()), user.getUuid());
+            logger.debug("Updating user: " + user.getUuid());
+            return getByUuid(user.getUuid());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug("Could not update user: " + user.getUuid());
+            return Optional.empty();
+        }
+    }*/
+
 
 
 }

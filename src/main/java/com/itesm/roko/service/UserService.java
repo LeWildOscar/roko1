@@ -23,11 +23,24 @@ public class UserService {
         return userDAO.insert(user);
     }
 
-    public Optional<User> getUser(){
-        //acá se mandaría a llamar el DAO
-        User user = new User();
-        user.setUsername("Nombre");
-        user.setCountry("Apellido");
-        return Optional.of(user);
+    public Optional<User> update(User user){
+        Optional<User> userDB = userDAO.getByUuid(user.getUuid());
+        if(userDB.isPresent()) {
+            return userDAO.update(user);
+        } else {
+            return Optional.empty();
+        }
+    }
+    public Optional<User> delete(String uuid){
+        Optional<User> user = userDAO.getByUuid(uuid);
+        if(user.isPresent()) {
+            return userDAO.delete(user.get());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<User> getUser(String username){
+        return userDAO.getByUsername(username);
     }
 }

@@ -1,5 +1,7 @@
 package com.itesm.roko.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Tournament {
@@ -10,8 +12,9 @@ public class Tournament {
 
     private int is_public;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date date_start;
-
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date date_end;
 
     private int pot;
@@ -34,11 +37,15 @@ public class Tournament {
 
     private String public_indentifier;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date on_created;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date on_updates;
 
     private int prize_id;
+
+
 
     private String prize_uuid; //---------------------- :)
 
@@ -184,5 +191,13 @@ public class Tournament {
 
     public void setPrize_id(int prize_id) {
         this.prize_id = prize_id;
+    }
+
+    public String getPrize_uuid() {
+        return prize_uuid;
+    }
+
+    public void setPrize_uuid(String prize_uuid) {
+        this.prize_uuid = prize_uuid;
     }
 }

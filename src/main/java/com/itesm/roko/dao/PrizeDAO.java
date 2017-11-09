@@ -35,6 +35,18 @@ public class PrizeDAO {
         return Optional.empty();
     }
 
+    public Optional<Prize> getById(String id){
+        String sql = "SELECT * FROM prize WHERE id = ?";
+        try {
+            BeanPropertyRowMapper<Prize> rowMapper = new BeanPropertyRowMapper<>(Prize.class);
+            Prize prize = jdbcTemplate. queryForObject(sql, rowMapper, id);
+            return Optional.of(prize);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
     public Optional<Prize> insert(Prize prize){
         String newUuid = UUID.randomUUID().toString();
         try{

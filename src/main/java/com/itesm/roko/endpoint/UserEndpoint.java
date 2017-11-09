@@ -27,9 +27,23 @@ public class UserEndpoint {
     private UserService userService;
 
     @GET
+    @Path("/user/{username}")
+    public Response search(@PathParam("username") String username){
+        Optional<User>user = userService.getUser(username);
+        Response response;
+        if(user.isPresent()) {
+            response = Response.ok(user.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+
+    }
+
+    @GET
     //@RequestMapping(value = "/user", method = RequestMethod.GET)
-    @Path("/user")
-    public  ResponseEntity<List<User>> search(){
+    @Path("/users")
+    public  Response list(){
         Optional<List<User>>users =  userService.list();
         Response response;
         if (users.isPresent()){
@@ -39,7 +53,7 @@ public class UserEndpoint {
             response = Response.noContent().build();
         }
 
-        return new ResponseEntity<List<User>>(users.get(), HttpStatus.OK);
+        return response;
     }
 
     @POST
@@ -55,5 +69,32 @@ public class UserEndpoint {
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
 
+    }
+
+    @PUT
+    @Path("/user/{uuid}")
+    public Response insert(@PathParam("uuid") String uuid, User user){
+        user.setUuid(uuid);
+        Optional<User> userDB = userService.update(user);
+        Response response;
+        if(userDB.isPresent()) {
+            response = Response.ok(userDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @DELETE
+    @Path("/user/{uuid}")
+    public Response delete(@PathParam("uuid") String uuid){
+        Optional<User> user = userService.delete(uuid);
+        Response response;
+        if(user.isPresent()){
+            response = Response.ok(user.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
     }
 }
