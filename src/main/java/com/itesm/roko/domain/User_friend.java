@@ -1,7 +1,14 @@
 package com.itesm.roko.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User_friend {
 
     private int id;
@@ -13,6 +20,8 @@ public class User_friend {
     private Date on_updated;
 
     private int user_id;
+
+    private int user_id1;
 
     public int getId() {
         return id;
@@ -53,4 +62,8 @@ public class User_friend {
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
+
+    public int getUser_id1() { return user_id1;}
+
+    public void setUser_id1(int user_id1) {this.user_id1 = user_id1;}
 }

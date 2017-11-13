@@ -43,10 +43,12 @@ public class UserDAO {
         try {
             BeanPropertyRowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
             User user = jdbcTemplate.queryForObject(sql, rowMapper, username);
+
             logger.debug("Getting usuario con username: " + username);
             return Optional.of(user);
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println(e.getMessage() +" getByUsername");
             logger.debug("No se encontro usuario con username: "+username);
         }
         return Optional.empty();

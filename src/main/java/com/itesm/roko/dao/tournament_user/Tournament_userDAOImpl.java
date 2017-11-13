@@ -1,6 +1,7 @@
-package com.itesm.roko.dao;
+package com.itesm.roko.dao.tournament_user;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.itesm.roko.dao.UserDAO;
+import com.itesm.roko.dao.tournament_user.SqlTournament_userDAO;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.itesm.roko.domain.Tournament_user;
-import com.itesm.roko.dao.UserDAO;
-import com.itesm.roko.domain.User;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class Tournament_userDAO implements SqlTournament_userDAO {
+public class Tournament_userDAOImpl implements SqlTournament_userDAO {
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
@@ -67,17 +66,17 @@ public class Tournament_userDAO implements SqlTournament_userDAO {
     }
 
 
-    public Optional<Tournament_user> insert (Tournament_user tournament_user, String username) {
+
+
+    public Optional<Tournament_user> insert (Tournament_user tournament_user) {
         String newUUid = UUID.randomUUID().toString();
 
         try{
-            User usuario = daoUsuario.getByUsername(username).get();
-            int userId = usuario.getId();
             jdbcTemplate.update(
                     "INSERT INTO tournament_user (uuid, is_admin, position, is_winner, prize_amount, on_created, on_updated, tournament_id, user_id )" +
                             " VALUES (?,?,?,?,?,?,?,?,?)",
                     newUUid, tournament_user.getIs_admin(),tournament_user.getPosition(), tournament_user.getIs_winner(), tournament_user.getPrize_amount(),
-                    tournament_user.getOn_created(), tournament_user.getOn_updated(), tournament_user.getTournament_id(), userId
+                    tournament_user.getOn_created(), tournament_user.getOn_updated(), tournament_user.getTournament_id(),tournament_user.getUser_id()
             );
             return getTournamentUserByUuid(newUUid);
         }catch (Exception e){
@@ -102,19 +101,20 @@ public class Tournament_userDAO implements SqlTournament_userDAO {
 
 
 
-    public Optional<Tournament_user> update (Tournament_user tournament_user, String uuid) {
+    public Optional<Tournament_user> update (Tournament_user tournament_user) {
         Date on_updated = new Date();
         int is_admin = tournament_user.getIs_admin();
         int position = tournament_user.getPosition();
         int isWinner = tournament_user.getIs_winner();
         int prizeAmount = tournament_user.getPrize_amount();
+        String uuid = tournament_user.getUuid();
         try {
             jdbcTemplate.update(
                     "UPDATE SET is_admin = ?, position = ?, is_winner = ?, prize_amount = ?, on_created = ?, on_updated = ? where uuid = ?",
                     is_admin, position, isWinner, prizeAmount, on_updated,uuid
             );
-            Tournament_user aux_tournament_user = getTournamentUserById(tournament_user.getId()).get();
-            return Optional.of(aux_tournament_user);
+
+            return getTournamentUserById(tournament_user.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

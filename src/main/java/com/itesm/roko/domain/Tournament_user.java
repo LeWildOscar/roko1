@@ -1,5 +1,7 @@
 package com.itesm.roko.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Tournament_user {
@@ -16,8 +18,9 @@ public class Tournament_user {
 
     private int prize_amount;
 
+    @JsonFormat(pattern = "yyyy-MM-DD hh:mm")
     private Date on_created;
-
+    @JsonFormat(pattern = "yyyy-MM-DD hh:mm")
     private Date on_updated;
 
     private int tournament_id;
