@@ -24,21 +24,23 @@ public class Tournament_userService {
         return tournament_userDAOImpl.insert(tournament_user);
     }
 
-    public Optional<Tournament_user> update (Tournament_user tournament_user, String uuid) {
+    public Optional<Tournament_user> update (String username, Tournament_user tournament_user, String uuid) {
+        User user = usuarioDAO.getByUsername(username).get();
+        Tournament_user aux_tournament_user = tournament_userDAOImpl.getTournamentUserByUuid(uuid).get();
+        tournament_user.setUuid(aux_tournament_user.getUuid());
+        tournament_user.setUser_id(user.getId());
         return tournament_userDAOImpl.update(tournament_user);
     }
 
-    public Optional<Boolean> delete (String uuid) {
-        return tournament_userDAOImpl.delete(uuid);
+    public Optional<Tournament_user> delete (String uuid) {
+        Tournament_user tournament_user = tournament_userDAOImpl.getTournamentUserByUuid(uuid).get();
+        return tournament_userDAOImpl.delete(tournament_user);
     }
 
     public Optional<List<Tournament_user>> getUserTournaments() {
         return tournament_userDAOImpl.getUserTournaments ();
     }
 
-    public Optional<Tournament_user> getTournamentUserById (int id) {
-        return tournament_userDAOImpl.getTournamentUserById(id);
-    }
 
     public Optional<Tournament_user> getTournamentUserByUuid (String uuid) {
         return tournament_userDAOImpl.getTournamentUserByUuid(uuid);

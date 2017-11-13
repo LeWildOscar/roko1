@@ -11,12 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 import java.util.List;
@@ -33,8 +30,9 @@ public class TournamentUserEndpoint {
 
 
     //Agregar un torneo a un username
-    @RequestMapping(value = "/usuario/{username}/torneo", method = RequestMethod.POST)
-    public Response insert(@RequestBody Tournament_user tournament_user, @PathVariable("username")String username) {
+    @POST
+    @Path("/usuario/{username}/torneo")
+    public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("username") String username) {
         Optional<Tournament_user> tournamet_user_response = tournament_userService.insert(tournament_user,username);
         Response response;
         if (tournamet_user_response.isPresent()) {
@@ -48,8 +46,8 @@ public class TournamentUserEndpoint {
 
 
 
-    //Devolver todos los torneos de un username
-    @RequestMapping(value = "/usuario/{username}/torneo", method = RequestMethod.GET)
+    @GET
+    @Path("/usuario/{username}/torneos")
     public Response getUserTournaments () {
         Optional<List<Tournament_user>> tournament_user_response = tournament_userService.getUserTournaments();
         Response response;
@@ -62,9 +60,10 @@ public class TournamentUserEndpoint {
         return response;
     }
 
-    //Devuelve el torneo concreto por uuid
-    @RequestMapping(value = "/usuario/{username}/torneo/{uuid}",method = RequestMethod.GET)
-    public Response getUserTournamentByUuid(@PathVariable("uuid") String uuid) {
+    @GET
+    @Path("/usuario/{username}/torneo/{uuid}")
+    public Response getUserTournamentByUuid(@PathParam("username")String username,
+                                            @PathParam("uuid") String uuid) {
         Optional<Tournament_user> tournament_user_response = tournament_userService.getTournamentUserByUuid(uuid);
         Response response;
         if (tournament_user_response.isPresent()) {
@@ -76,10 +75,15 @@ public class TournamentUserEndpoint {
     }
 
     //Modifica un torneo de usuario concreto por uuid
+
+
+
+
     @PUT
     @Path("/usuario/{username}/torneo/{uuid}")
-    public Response modificarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("uuid") String uuid) {
-        Optional<Tournament_user> tournament_user_response = tournament_userService.update(tournament_user,uuid);
+    public Response modificarTorneoUsuario(@RequestBody Tournament_user tournament_user,
+    @PathParam("username")String username, @PathParam("uuid") String uuid) {
+        Optional<Tournament_user> tournament_user_response = tournament_userService.update(username,tournament_user,uuid);
         Response response;
         if (tournament_user_response.isPresent()) {
             response = Response.ok(tournament_user_response).build();
@@ -89,10 +93,11 @@ public class TournamentUserEndpoint {
         return response;
     }
 
-    @RequestMapping(value = "/usuario/{username}/torneo/{uuid}",method = RequestMethod.DELETE)
-    public Response deleteUserTournamentByUuid(@PathVariable("uuid")String uuid) {
+    @DELETE
+    @Path("/usuario/{username}/torneo/{uuid}")
+    public Response deleteUserTournamentByUuid(@PathParam("username")String username, @PathParam("uuid") String uuid) {
 
-        Optional<Boolean> tournament_userService_response = tournament_userService.delete(uuid);
+        Optional<Tournament_user> tournament_userService_response = tournament_userService.delete(uuid);
         Response response;
 
         if (tournament_userService_response.isPresent()) {

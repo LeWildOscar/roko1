@@ -87,12 +87,12 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
 
 
 
-    public Optional<Boolean> delete (String uuid) {
+    public Optional<Tournament_user> delete (Tournament_user tournament_user) {
         String sql = "DELETE FROM tourname_user WHERE uuid = ?";
         try {
             BeanPropertyRowMapper<Tournament_user> rowMapper = new BeanPropertyRowMapper<>(Tournament_user.class);
-            jdbcTemplate.update(sql,rowMapper,uuid);
-            return Optional.of(new Boolean(true));
+            jdbcTemplate.update(sql,rowMapper,tournament_user.getUuid());
+            return Optional.of(tournament_user);
         } catch (Exception e) {
             e.printStackTrace();
         }

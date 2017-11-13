@@ -12,7 +12,7 @@ public interface SqlTournament_userDAO {
     public Optional<Tournament_user> getTournamentUserById (int id);
     public Optional<List<Tournament_user>> getUserTournaments ();
     public Optional<Tournament_user> insert (Tournament_user tournament_user);
-    public Optional<Boolean> delete (String uuid);
+    public Optional<Tournament_user> delete (Tournament_user tournament_user);
     public Optional<Tournament_user> update (Tournament_user tournament_user);
 
 
