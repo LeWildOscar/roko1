@@ -30,6 +30,7 @@ public class UserEndpoint {
     @Path("/user/{username}")
     public Response search(@PathParam("username") String username){
         Optional<User>user = userService.getUser(username);
+
         Response response;
         if(user.isPresent()) {
             response = Response.ok(user.get()).build();
@@ -73,7 +74,7 @@ public class UserEndpoint {
 
     @PUT
     @Path("/user/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, User user){
+    public Response update(@PathParam("uuid") String uuid, User user){
         user.setUuid(uuid);
         Optional<User> userDB = userService.update(user);
         Response response;
