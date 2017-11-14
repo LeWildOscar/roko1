@@ -2,6 +2,8 @@ package com.itesm.roko.dao.tournament_user;
 
 import com.itesm.roko.dao.UserDAO;
 import com.itesm.roko.dao.tournament_user.SqlTournament_userDAO;
+import com.itesm.roko.domain.Tournament;
+import com.itesm.roko.domain.User;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,11 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
         String sql = "SELECT * FROM tournament_user WHERE uuid = ?";
         try {
             BeanPropertyRowMapper<Tournament_user> rowMapper = new BeanPropertyRowMapper<>(Tournament_user.class);
-            Tournament_user tournament_user = jdbcTemplate.queryForObject(sql, rowMapper, uuid);
-            logger.debug("Getting tournament_user con uuid: " + uuid);
+            Tournament_user tournament_user = jdbcTemplate.queryForObject(sql,rowMapper,uuid);
             return Optional.of(tournament_user);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            logger.debug("No se encontro torneo_user con uuid: "+uuid);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -54,18 +55,50 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
 
     }
 
-    public Optional<List<Tournament_user>> getUserTournaments () {
-        String sql = "SELECT * FROM tournament_user";
+    public Optional<List<Tournament_user>> getUserTournaments (int user_id) {
+        String sql = "SELECT * FROM tournament_user WHERE user_id = ?";
         try {
-            List<Tournament_user> userTournaments = jdbcTemplate.query(sql,new BeanPropertyRowMapper<Tournament_user>());
+            List<Tournament_user> userTournaments = jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Tournament_user.class),user_id);
             return Optional.of(userTournaments);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
         return Optional.empty();
     }
 
+    @Override
+    public Optional<List<Tournament>> getTournamentsUser (String username) {
+        String sql = "SELECT tournament.id, tournament.uuid, tournament.is_public, tournament.date_start, " +
+                "tournament.date_end, tournament.pot, tournament.fee, tournament.level, tournament.prize_spread, " +
+                "tournament.max_users, tournament.min_users, tournament.description, tournament.name, " +
+                "tournament.password, tournament.public_identifier, tournament.on_created, tournament.on_updated, " +
+                "tournament.prize_id FROM tournament WHERE tournament.id = (SELECT tournament_user.id FROM " +
+                "tournament_user JOIN user ON tournament_user.user_id = user.id WHERE user.id = ? )";
+        User user = daoUsuario.getByUsername(username).get();
+        try {
+            List<Tournament> list_user = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Tournament.class),user.getId());
+            return Optional.of(list_user);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 
+    @Override
+    public Optional<List<Tournament>> getTournamentsAdminUser(String username) {
+        String sql = "select * from tournament where id = (select tournament_user.id from tournament_user join user on tournament_user.user_id = user.id where user.id = ? and tournament_user.is_admin = 1)";
+        User user = daoUsuario.getByUsername(username).get();
+        try {
+            List<Tournament> list_tournament = jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Tournament.class),user.getId());
+            return Optional.of(list_tournament);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 
 
     public Optional<Tournament_user> insert (Tournament_user tournament_user) {

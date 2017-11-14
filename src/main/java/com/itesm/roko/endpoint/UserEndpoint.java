@@ -27,7 +27,7 @@ public class UserEndpoint {
     private UserService userService;
 
     @GET
-    @Path("/user/{username}")
+    @Path("/usuario/{username}")
     public Response search(@PathParam("username") String username){
         Optional<User>user = userService.getUser(username);
 
@@ -43,7 +43,7 @@ public class UserEndpoint {
 
     @GET
     //@RequestMapping(value = "/user", method = RequestMethod.GET)
-    @Path("/users")
+    @Path("/usuarios")
     public  Response list(){
         Optional<List<User>>users =  userService.list();
         Response response;
@@ -58,7 +58,7 @@ public class UserEndpoint {
     }
 
     @POST
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public ResponseEntity<User> insert(@RequestBody User user){
         user.setTotal_points(0);
         user.setLosts(0);
@@ -73,7 +73,7 @@ public class UserEndpoint {
     }
 
     @PUT
-    @Path("/user/{uuid}")
+    @Path("/usuario/{uuid}")
     public Response update(@PathParam("uuid") String uuid, User user){
         user.setUuid(uuid);
         Optional<User> userDB = userService.update(user);
@@ -87,7 +87,7 @@ public class UserEndpoint {
     }
 
     @DELETE
-    @Path("/user/{uuid}")
+    @Path("/usuario/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<User> user = userService.delete(uuid);
         Response response;

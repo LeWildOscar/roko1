@@ -2,6 +2,7 @@ package com.itesm.roko.service;
 
 import com.itesm.roko.dao.UserDAO;
 import com.itesm.roko.dao.tournament_user.Tournament_userDAOImpl;
+import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_user;
 import com.itesm.roko.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,17 @@ public class Tournament_userService {
         return tournament_userDAOImpl.delete(tournament_user);
     }
 
-    public Optional<List<Tournament_user>> getUserTournaments() {
-        return tournament_userDAOImpl.getUserTournaments ();
+    public Optional<List<Tournament_user>> getUserTournaments(String username) {
+        User user = usuarioDAO.getByUsername(username).get();
+        return tournament_userDAOImpl.getUserTournaments (user.getId());
+    }
+
+    public Optional<List<Tournament>> getTournamentsUser (String username) {
+        return tournament_userDAOImpl.getTournamentsUser(username);
+    }
+
+    public Optional<List<Tournament>> getTournamentsAdminUser (String username) {
+        return tournament_userDAOImpl.getTournamentsAdminUser(username);
     }
 
 

@@ -2,6 +2,7 @@ package com.itesm.roko.endpoint;
 
 
 
+import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_user;
 import com.itesm.roko.service.Tournament_userService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ import java.util.Optional;
 import java.util.List;
 
 @Component
-@RestController
-@RequestMapping("v1")
+@Path("v1")
 @Produces(MediaType.APPLICATION_JSON)
 public class TournamentUserEndpoint {
 
@@ -44,12 +44,15 @@ public class TournamentUserEndpoint {
     }
 
 
-
+    /**
+     * Devuelve los torneos en los que el usuario participa
+     * return: List<Tournament>
+     * */
 
     @GET
     @Path("/usuario/{username}/torneos")
-    public Response getUserTournaments () {
-        Optional<List<Tournament_user>> tournament_user_response = tournament_userService.getUserTournaments();
+    public Response getTorneosParticipaUsuario (@PathParam("username")String username) {
+        Optional<List<Tournament>> tournament_user_response = tournament_userService.getTournamentsUser(username);
         Response response;
         if (tournament_user_response.isPresent()) {
             response = Response.ok(tournament_user_response.get()).build();
@@ -59,6 +62,23 @@ public class TournamentUserEndpoint {
 
         return response;
     }
+
+    @GET
+    @Path("/usuario/{username}/torneos/admin")
+    public Response getTorneosPropiosUsuario (@PathParam("username")String username) {
+        Optional<List<Tournament>> tournament_user_response = tournament_userService.getTournamentsAdminUser(username);
+        Response response;
+        if (tournament_user_response.isPresent()) {
+            response = Response.ok(tournament_user_response.get()).build();
+        } else {
+            response = Response.noContent().build();
+        }
+
+        return response;
+    }
+
+
+
 
     @GET
     @Path("/usuario/{username}/torneo/{uuid}")
@@ -107,6 +127,9 @@ public class TournamentUserEndpoint {
         }
         return response;
     }
+
+
+
 
 
 
