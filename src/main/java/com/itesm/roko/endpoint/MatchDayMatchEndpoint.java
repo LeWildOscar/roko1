@@ -25,7 +25,7 @@ public class MatchDayMatchEndpoint {
 
 
     @POST
-    @Path("")
+    @Path("/partidoJornada")
     public Response insertarPartidoJornada (Jornada_match jornada_match) {
 
         return null;
