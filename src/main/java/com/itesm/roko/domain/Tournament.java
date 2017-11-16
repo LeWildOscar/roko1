@@ -35,7 +35,7 @@ public class Tournament {
 
     private String password;
 
-    private String public_indentifier;
+    private String public_identifier;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date on_created;
@@ -161,12 +161,12 @@ public class Tournament {
         this.password = password;
     }
 
-    public String getPublic_indentifier() {
-        return public_indentifier;
+    public String getPublic_identifier() {
+        return public_identifier;
     }
 
-    public void setPublic_indentifier(String public_indentifier) {
-        this.public_indentifier = public_indentifier;
+    public void setPublic_identifier(String public_identifier) {
+        this.public_identifier = public_identifier;
     }
 
     public Date getOn_created() {

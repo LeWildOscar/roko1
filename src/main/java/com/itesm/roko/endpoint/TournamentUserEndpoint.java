@@ -37,7 +37,7 @@ public class TournamentUserEndpoint {
         Optional<Tournament_user> tournamet_user_response = tournament_userService.insert(tournament_user,username);
         Response response;
         if (tournamet_user_response.isPresent()) {
-            response = Response.ok(tournamet_user_response).build();
+            response = Response.ok(tournamet_user_response.get()).build();
         } else {
             response = Response.noContent().build();
         }

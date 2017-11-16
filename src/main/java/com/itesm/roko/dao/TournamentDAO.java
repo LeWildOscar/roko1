@@ -45,7 +45,7 @@ public class TournamentDAO {
                             "password, public_identifier, on_created, on_updated, prize_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     newUuid, tournament.getIs_public(), tournament.getDate_start(), tournament.getDate_end(),
                     tournament.getPot(), tournament.getFee(), tournament.getLevel(), tournament.getPrize_spread(), tournament.getMax_users(),
-                    tournament.getMin_users(), tournament.getDescription(), tournament.getName(), tournament.getPassword(), tournament.getPublic_indentifier(),
+                    tournament.getMin_users(), tournament.getDescription(), tournament.getName(), tournament.getPassword(), tournament.getPublic_identifier(),
                     tournament.getOn_created(), tournament.getOn_updates(), tournament.getPrize_id()
             );
             return getByUuid(newUuid);

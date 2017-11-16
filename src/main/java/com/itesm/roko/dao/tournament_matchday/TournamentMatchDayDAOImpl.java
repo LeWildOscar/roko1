@@ -4,12 +4,14 @@ import com.itesm.roko.domain.Tournament_matchday;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public class TournamentMatchDayDAOImpl implements SqlTournamentMatchdayDAO {
 
     @Autowired
