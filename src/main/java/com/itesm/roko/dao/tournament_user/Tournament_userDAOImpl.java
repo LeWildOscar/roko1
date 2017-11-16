@@ -121,7 +121,7 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
 
 
     public Optional<Tournament_user> delete (Tournament_user tournament_user) {
-        String sql = "DELETE FROM tourname_user WHERE uuid = ?";
+        String sql = "DELETE FROM tournament_user WHERE uuid = ?";
         try {
             BeanPropertyRowMapper<Tournament_user> rowMapper = new BeanPropertyRowMapper<>(Tournament_user.class);
             jdbcTemplate.update(sql,rowMapper,tournament_user.getUuid());
@@ -143,7 +143,7 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
         String uuid = tournament_user.getUuid();
         try {
             jdbcTemplate.update(
-                    "UPDATE SET is_admin = ?, position = ?, is_winner = ?, prize_amount = ?, on_created = ?, on_updated = ? where uuid = ?",
+                    "UPDATE tournament_user SET is_admin = ?, position = ?, is_winner = ?, prize_amount = ?, on_created = ?, on_updated = ? where uuid = ?",
                     is_admin, position, isWinner, prizeAmount, on_updated,uuid
             );
 

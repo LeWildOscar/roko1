@@ -88,7 +88,7 @@ public class SqlUserFriendDAOImpl implements SqlUserFriendDAO {
         int user_id1 = user_friend.getUser_id1();
         try {
             BeanPropertyRowMapper<User_friend> rowMapper = new BeanPropertyRowMapper<>(User_friend.class);
-            jdbcTemplate.update("UPDATE SET on_updated = ?,user_id = ?,user_id1 = ? WHERE uuid = ?",rowMapper,on_update,user_id,user_id1,uuid);
+            jdbcTemplate.update("UPDATE user SET on_updated = ?,user_id = ?,user_id1 = ? WHERE uuid = ?",rowMapper,on_update,user_id,user_id1,uuid);
             logger.debug("User_friend con uuid: "+uuid +" modificado");
             User_friend aux_user_friend = getByUuid(uuid).get();
             return Optional.of(aux_user_friend);

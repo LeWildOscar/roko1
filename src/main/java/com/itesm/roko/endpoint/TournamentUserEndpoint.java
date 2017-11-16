@@ -6,9 +6,6 @@ import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_user;
 import com.itesm.roko.service.Tournament_userService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +26,11 @@ public class TournamentUserEndpoint {
 
 
 
-    //Agregar un torneo a un username
+    /**
+     *
+     * Agrega a un torneo existente un usuario existente
+     * return: un objeto tournament_user
+     * */
     @POST
     @Path("/usuario/{username}/torneo")
     public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("username") String username) {
@@ -46,6 +47,9 @@ public class TournamentUserEndpoint {
 
     /**
      * Devuelve los torneos en los que el usuario participa
+     *
+     * Agregar desde el frontend el id de torneo
+     *
      * return: List<Tournament>
      * */
 
