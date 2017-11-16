@@ -96,7 +96,7 @@ public class UserDAO {
     }
 
     public Optional<List<User>>list(){
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM user order by total_points desc";
         try{
             List<User>users= jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(User.class));

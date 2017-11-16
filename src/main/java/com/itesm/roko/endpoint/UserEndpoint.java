@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @Component
 @Path("/v1")
-//@RequestMapping("v1")
 @Produces(MediaType.APPLICATION_JSON)
 
 public class UserEndpoint {
