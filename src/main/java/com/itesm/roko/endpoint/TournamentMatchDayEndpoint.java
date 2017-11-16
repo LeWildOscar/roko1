@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -54,7 +55,10 @@ public class TournamentMatchDayEndpoint {
 
     @GET
     @Path("/jornadas")
-    public Response obtenerTorneosJornada ()
+    public Response obtenerTorneosJornada () {
+        //Optional<List<Tournament_matchday>> list_tournament_matchday =
+        return null;
+    }
 
 
 
