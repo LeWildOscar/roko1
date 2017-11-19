@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.List;
 
 @Component
-@Path("v1")
+@Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 public class TournamentUserEndpoint {
 
@@ -34,15 +34,16 @@ public class TournamentUserEndpoint {
     @POST
     @Path("/usuario/{username}/torneo")
     public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("username") String username) {
-        Optional<Tournament_user> tournamet_user_response = tournament_userService.insert(tournament_user,username);
+        Optional<Tournament_user> tournament_user_response = tournament_userService.insert(tournament_user,username);
         Response response;
-        if (tournamet_user_response.isPresent()) {
-            response = Response.ok(tournamet_user_response.get()).build();
+        if (tournament_user_response.isPresent()) {
+            response = Response.ok(tournament_user_response.get()).build();
         } else {
             response = Response.noContent().build();
         }
         return response;
     }
+
 
 
     /**
@@ -131,6 +132,7 @@ public class TournamentUserEndpoint {
         }
         return response;
     }
+
 
 
 

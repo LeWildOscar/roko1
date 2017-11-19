@@ -26,15 +26,21 @@ public class TournamentEndpoint {
     private TournamentService tournamentService;
 
     @POST
-    @Path("/tournament")
-    public ResponseEntity<Tournament> insert(@RequestBody Tournament tournament){
+    @Path("/torneos")
+    public Response insert(@RequestBody Tournament tournament){
 
         Optional<Tournament>tournamentDB = tournamentService.insert(tournament);
 
-        return new ResponseEntity<Tournament>(tournamentDB.get(), HttpStatus.OK);
+        Response response;
+        if(tournamentDB.isPresent()){
+            response = Response.ok(tournamentDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
     }
     @GET
-    @Path("/tournaments")
+    @Path("/torneos")
     public Response list(){
         Optional<List<Tournament>>tournaments = tournamentService.list();
         Response response;

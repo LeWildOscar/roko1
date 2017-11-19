@@ -103,7 +103,7 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
 
     public Optional<Tournament_user> insert (Tournament_user tournament_user) {
         String newUUid = UUID.randomUUID().toString();
-
+        System.out.println("vamo a intentar");
         try{
             jdbcTemplate.update(
                     "INSERT INTO tournament_user (uuid, is_admin, position, is_winner, prize_amount, on_created, on_updated, tournament_id, user_id )" +
@@ -111,8 +111,10 @@ public class Tournament_userDAOImpl implements SqlTournament_userDAO {
                     newUUid, tournament_user.getIs_admin(),tournament_user.getPosition(), tournament_user.getIs_winner(), tournament_user.getPrize_amount(),
                     tournament_user.getOn_created(), tournament_user.getOn_updated(), tournament_user.getTournament_id(),tournament_user.getUser_id()
             );
+            System.out.println("si se pudo");
             return getTournamentUserByUuid(newUUid);
         }catch (Exception e){
+            System.out.println("no c pudo :'v");
             e.printStackTrace();
             return Optional.empty();
         }
