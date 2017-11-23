@@ -1,5 +1,7 @@
 package com.itesm.roko.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Match {
@@ -8,15 +10,17 @@ public class Match {
 
     private String uuid;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date date_start;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date date_end;
 
     private int score;
 
     private int home_goals;
 
-    private int away_score;
+    private int away_goals;
 
     private String type;
 
@@ -25,6 +29,10 @@ public class Match {
     private Date on_updated;
 
     private int season_matchday_id;
+
+    private String home_team;
+
+    private String away_team;
 
     public int getId() {
         return id;
@@ -74,12 +82,12 @@ public class Match {
         this.home_goals = home_goals;
     }
 
-    public int getAway_score() {
-        return away_score;
+    public int getAway_goals() {
+        return away_goals;
     }
 
-    public void setAway_score(int away_score) {
-        this.away_score = away_score;
+    public void setAway_goals(int away_goals) {
+        this.away_goals = away_goals;
     }
 
     public String getType() {
@@ -112,5 +120,21 @@ public class Match {
 
     public void setSeason_matchday_id(int season_matchday_id) {
         this.season_matchday_id = season_matchday_id;
+    }
+
+    public String getHome_team() {
+        return home_team;
+    }
+
+    public void setHome_team(String home_team) {
+        this.home_team = home_team;
+    }
+
+    public String getAway_team() {
+        return away_team;
+    }
+
+    public void setAway_team(String away_team) {
+        this.away_team = away_team;
     }
 }

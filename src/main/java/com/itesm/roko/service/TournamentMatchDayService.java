@@ -1,7 +1,5 @@
 package com.itesm.roko.service;
 
-
-
 import com.itesm.roko.dao.TournamentDAO;
 import com.itesm.roko.dao.tournament_matchday.TournamentMatchDayDAOImpl;
 import com.itesm.roko.domain.Tournament;
@@ -24,10 +22,8 @@ public class TournamentMatchDayService {
 
 
 
-    public Optional<Tournament_matchday> insert (Tournament_matchday tournament_matchday, String uuid) {
-        Tournament aux_tournament = tournamentDAO.getByUuid(uuid).get();
-        int id_torneo = aux_tournament.getId();
-        tournament_matchday.setId(id_torneo);
+    public Optional<Tournament_matchday> insert (Tournament_matchday tournament_matchday) {
+
         return tournamentMatchDayDAO.insert(tournament_matchday);
     }
 

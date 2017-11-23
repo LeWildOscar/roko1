@@ -10,6 +10,16 @@ public class Pick {
 
     private Date on_created;
 
+    public Date getOn_updated() {
+        return on_updated;
+    }
+
+    public void setOn_updated(Date on_updated) {
+        this.on_updated = on_updated;
+    }
+
+    private Date on_updated;
+
     private int prediction;
 
     private int tournament_match_id;

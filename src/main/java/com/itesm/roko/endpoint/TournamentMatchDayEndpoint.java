@@ -1,6 +1,7 @@
 package com.itesm.roko.endpoint;
 
 
+import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_matchday;
 import org.springframework.http.HttpStatus;
 import com.itesm.roko.service.TournamentMatchDayService;
@@ -28,7 +29,7 @@ public class TournamentMatchDayEndpoint {
 
 
     @GET
-    @Path("/jornada/{uuidJornada}")
+    @Path("/jornadas/{uuidJornada}")
     public Response obtenerTorneoJornada (@PathVariable("uuidJornada")String uuidJornada ) {
         Optional<Tournament_matchday> aux_tournament_matchday = tournamentMatchDayService.getTournamentMatchDayByUuid(uuidJornada);
         Response response;
@@ -51,6 +52,20 @@ public class TournamentMatchDayEndpoint {
             response = Response.noContent().build();
         }
         return response;
+    }
+
+    @POST
+    @Path("/jornadas")
+    public Response insert(Tournament_matchday tournament_matchday){
+        Optional<Tournament_matchday>tournament_matchdayDB = tournamentMatchDayService.insert(tournament_matchday);
+        Response response;
+        if (tournament_matchdayDB.isPresent()){
+            response = Response.ok(tournament_matchdayDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+
     }
 
 

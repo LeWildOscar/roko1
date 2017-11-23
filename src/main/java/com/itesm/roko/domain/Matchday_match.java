@@ -2,7 +2,7 @@ package com.itesm.roko.domain;
 
 import java.util.Date;
 
-public class Jornada_match {
+public class Matchday_match {
 
     private int id;
 

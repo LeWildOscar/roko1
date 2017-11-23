@@ -20,6 +20,10 @@ public class Team {
 
     private Date on_updated;
 
+    private String home_team;
+
+    private String away_team;
+
     public int getId() {
         return id;
     }
@@ -82,5 +86,21 @@ public class Team {
 
     public void setOn_updated(Date on_updated) {
         this.on_updated = on_updated;
+    }
+
+    public String getHome_team() {
+        return home_team;
+    }
+
+    public void setHome_team(String home_team) {
+        this.home_team = home_team;
+    }
+
+    public String getAway_team() {
+        return away_team;
+    }
+
+    public void setAway_team(String away_team) {
+        this.away_team = away_team;
     }
 }
