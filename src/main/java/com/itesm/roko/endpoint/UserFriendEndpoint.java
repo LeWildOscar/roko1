@@ -49,9 +49,9 @@ public class UserFriendEndpoint {
     * return: user_friend
     * */
     @POST
-    @Path("/usuarios/{username}/amigos")
-    public Response agregarAmigo(@PathParam("username")String username, @RequestBody User user) {
-        Optional<User_friend> user_friend_db = userFriendservice.insertUserFriend(user,username);
+    @Path("/usuarios/{username}/amigos/{new_friend}")
+    public Response agregarAmigo(@PathParam("username")String username, @PathParam("new_friend")String new_friend) {
+        Optional<User_friend> user_friend_db = userFriendservice.insertUserFriend(new_friend,username);
         Response response;
         if (user_friend_db.isPresent()) {
             response = Response.ok(user_friend_db.get()).build();

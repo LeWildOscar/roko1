@@ -26,11 +26,12 @@ public class UserFriendService {
     }
 
 
-    public Optional<User_friend> insertUserFriend(User user, String username) {
+    public Optional<User_friend> insertUserFriend(String newFriend, String username) {
         User_friend user_friend = new User_friend();
         User aux_user = userDAO.getByUsername(username).get();
+        User new_friend = userDAO.getByUsername(newFriend).get();
         user_friend.setUser_id(aux_user.getId());
-        user_friend.setUser_id1(user.getId());
+        user_friend.setUser_id1(new_friend.getId());
         return userFriendDAO.insertUserFriend(user_friend);
     }
 

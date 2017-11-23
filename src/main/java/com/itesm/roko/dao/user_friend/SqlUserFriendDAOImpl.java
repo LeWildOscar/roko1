@@ -136,7 +136,7 @@ public class SqlUserFriendDAOImpl implements SqlUserFriendDAO {
                     "user.password,user.on_create,user.on_update,user.total_points,user.losts," +
                     "user.played,user.country,user.total_money,user.money_in,user.money_out," +
                     "user.wins FROM user join user_friend on user.id = user_friend.user_id1 where" +
-                    " user_friend.user_id = ?";
+                    " user_friend.user_id = ? order by total_points desc";
 
             List<User> user_friends = jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class),user_id);
             return Optional.of(user_friends);
