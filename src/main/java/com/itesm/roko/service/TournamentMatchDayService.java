@@ -36,6 +36,10 @@ public class TournamentMatchDayService {
 
     }
 
+    public Optional<Tournament_matchday>getByTournament_id(String tournament_id){
+        return  tournamentMatchDayDAO.getByTournament_id(tournament_id);
+    }
+
 
 
 

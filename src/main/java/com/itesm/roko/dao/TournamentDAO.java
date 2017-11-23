@@ -1,5 +1,6 @@
 package com.itesm.roko.dao;
 
+import com.itesm.roko.domain.Match;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Repository
@@ -53,14 +55,16 @@ public class TournamentDAO {
 
     public Optional<Tournament> insert(Tournament tournament){
         String newUuid = UUID.randomUUID().toString();
+        Random rnd = new Random();
+        int public_identifier = 1000 + rnd.nextInt(9000);
         try{
             jdbcTemplate.update(
                     "INSERT INTO tournament(uuid, is_public, date_start, date_end, pot, fee, level, prize_spread, max_users, min_users, description, name, " +
                             "password, public_identifier, on_created, on_updated, prize_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     newUuid, tournament.getIs_public(), tournament.getDate_start(), tournament.getDate_end(),
                     tournament.getPot(), tournament.getFee(), tournament.getLevel(), tournament.getPrize_spread(), tournament.getMax_users(),
-                    tournament.getMin_users(), tournament.getDescription(), tournament.getName(), tournament.getPassword(), tournament.getPublic_identifier(),
-                    tournament.getOn_created(), tournament.getOn_updates(), tournament.getPrize_id()
+                    tournament.getMin_users(), tournament.getDescription(), tournament.getName(), tournament.getPassword(), public_identifier,
+                    tournament.getOn_created(), tournament.getOn_updates(), 1
             );
             return getByUuid(newUuid);
         }catch (Exception e){
@@ -83,5 +87,7 @@ public class TournamentDAO {
         }
         return Optional.empty();
     }
+
+
 
 }

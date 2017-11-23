@@ -14,6 +14,7 @@ public interface SqlTournamentMatchdayDAO {
     Optional<Tournament_matchday> insert (Tournament_matchday tournament_matchday);
     Optional<Tournament_matchday> update (Tournament_matchday tournament_matchday);
     Optional<Tournament_matchday> delete (Tournament_matchday tournament_matchday);
+    Optional<Tournament_matchday> getByTournament_id (String tournament_id);
 
 
 

@@ -24,7 +24,20 @@ public class TournamentMatchDayDAOImpl implements SqlTournamentMatchdayDAO {
             Tournament_matchday tournament_matchday = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Tournament_matchday.class),uuid);
             return Optional.of(tournament_matchday);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Tournament_matchday> getByTournament_id (String tournament_id) {
+        String sql = "Select * from tournament_matchday where tournament_id = ?";
+        try {
+            Tournament_matchday tournament_matchday = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Tournament_matchday.class),tournament_id);
+            return Optional.of(tournament_matchday);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return Optional.empty();

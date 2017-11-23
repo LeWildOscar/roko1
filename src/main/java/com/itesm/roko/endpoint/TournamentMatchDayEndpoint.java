@@ -27,7 +27,7 @@ public class TournamentMatchDayEndpoint {
     private TournamentMatchDayService tournamentMatchDayService;
 
 
-
+    /*
     @GET
     @Path("/jornadas/{uuidJornada}")
     public Response obtenerTorneoJornada (@PathVariable("uuidJornada")String uuidJornada ) {
@@ -39,7 +39,7 @@ public class TournamentMatchDayEndpoint {
             response = Response.noContent().build();
         }
         return response;
-    }
+    }*/
 
     @GET
     @Path("/jornadas")
@@ -66,6 +66,19 @@ public class TournamentMatchDayEndpoint {
         }
         return response;
 
+    }
+
+    @GET
+    @Path("/jornadas/{tournament_id}")
+    public Response getByTournament(@PathParam("tournament_id")String tournament_id){
+        Optional<Tournament_matchday> tournament_matchday = tournamentMatchDayService.getByTournament_id(tournament_id);
+        Response response;
+        if (tournament_matchday.isPresent()){
+            response = Response.ok(tournament_matchday.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
     }
 
 
