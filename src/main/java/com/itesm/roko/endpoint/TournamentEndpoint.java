@@ -52,5 +52,18 @@ public class TournamentEndpoint {
         return response;
     }
 
+    @GET
+    @Path("/torneos/{public_identifier}")
+    public Response search(@PathParam("public_identifier") String public_identifier){
+        Optional<Tournament>tournament = tournamentService.getByPublicIdentifier(public_identifier);
+        Response response;
+        if(tournament.isPresent()){
+            response = Response.ok(tournament.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
 
 }

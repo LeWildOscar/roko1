@@ -37,6 +37,20 @@ public class TournamentDAO {
         return Optional.empty();
     }
 
+    public Optional<Tournament> getByPublicIdentifier(String public_identifier){
+        String sql = "SELECT * FROM tournament WHERE public_identifier = ?";
+        try {
+            BeanPropertyRowMapper<Tournament> rowMapper = new BeanPropertyRowMapper<>(Tournament.class);
+            Tournament tournament = jdbcTemplate.queryForObject(sql, rowMapper, public_identifier);
+            logger.debug("Getting tournament con public_identifier: " + public_identifier);
+            return Optional.of(tournament);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug("No se encontro torneo con public_identifier: "+public_identifier);
+        }
+        return Optional.empty();
+    }
+
     public Optional<Tournament> insert(Tournament tournament){
         String newUuid = UUID.randomUUID().toString();
         try{

@@ -51,5 +51,9 @@ public class TournamentService {
         return tournamentDAO.list();
     }
 
+    public Optional<Tournament>getByPublicIdentifier(String public_identifier){
+        return tournamentDAO.getByPublicIdentifier(public_identifier);
+    }
+
 
 }
