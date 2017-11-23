@@ -32,7 +32,7 @@ public class TournamentUserEndpoint {
      * return: un objeto tournament_user
      * */
     @POST
-    @Path("/usuario/{username}/torneo")
+    @Path("/usuarios/{username}/torneo")
     public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("username") String username) {
         Optional<Tournament_user> tournament_user_response = tournament_userService.insert(tournament_user,username);
         Response response;
@@ -55,7 +55,7 @@ public class TournamentUserEndpoint {
      * */
 
     @GET
-    @Path("/usuario/{username}/torneos")
+    @Path("/usuarios/{username}/torneos")
     public Response getTorneosParticipaUsuario (@PathParam("username")String username) {
         Optional<List<Tournament>> tournament_user_response = tournament_userService.getTournamentsUser(username);
         Response response;
@@ -69,7 +69,7 @@ public class TournamentUserEndpoint {
     }
 
     @GET
-    @Path("/usuario/{username}/torneos/admin")
+    @Path("/usuarios/{username}/torneos/admin")
     public Response getTorneosPropiosUsuario (@PathParam("username")String username) {
         Optional<List<Tournament>> tournament_user_response = tournament_userService.getTournamentsAdminUser(username);
         Response response;
@@ -86,7 +86,7 @@ public class TournamentUserEndpoint {
 
 
     @GET
-    @Path("/usuario/{username}/torneo/{uuid}")
+    @Path("/usuarios/{username}/torneo/{uuid}")
     public Response getUserTournamentByUuid(@PathParam("username")String username,
                                             @PathParam("uuid") String uuid) {
         Optional<Tournament_user> tournament_user_response = tournament_userService.getTournamentUserByUuid(uuid);
@@ -105,7 +105,7 @@ public class TournamentUserEndpoint {
 
 
     @PUT
-    @Path("/usuario/{username}/torneo/{uuid}")
+    @Path("/usuarios/{username}/torneo/{uuid}")
     public Response modificarTorneoUsuario(@RequestBody Tournament_user tournament_user,
     @PathParam("username")String username, @PathParam("uuid") String uuid) {
         Optional<Tournament_user> tournament_user_response = tournament_userService.update(username,tournament_user,uuid);
@@ -119,7 +119,7 @@ public class TournamentUserEndpoint {
     }
 
     @DELETE
-    @Path("/usuario/{username}/torneo/{uuid}")
+    @Path("/usuarios/{username}/torneo/{uuid}")
     public Response deleteUserTournamentByUuid(@PathParam("username")String username, @PathParam("uuid") String uuid) {
 
         Optional<Tournament_user> tournament_userService_response = tournament_userService.delete(uuid);

@@ -31,7 +31,7 @@ public class UserFriendEndpoint {
      * return: List<User>
      * */
     @GET
-    @Path("/usuario/{username}/amigos")
+    @Path("/usuarios/{username}/amigos")
     public Response getFriends(@PathParam("username") String username) {
         Optional<List<User>> user_friend_db = userFriendservice.getFriendsList(username);
         Response response;
@@ -49,7 +49,7 @@ public class UserFriendEndpoint {
     * return: user_friend
     * */
     @POST
-    @Path("/usuario/{username}/amigos")
+    @Path("/usuarios/{username}/amigos")
     public Response agregarAmigo(@PathParam("username")String username, @RequestBody User user) {
         Optional<User_friend> user_friend_db = userFriendservice.insertUserFriend(user,username);
         Response response;
@@ -64,7 +64,7 @@ public class UserFriendEndpoint {
 
 
     @DELETE
-    @Path("/usuario/{username}/amigos/{uuid}")
+    @Path("/usuarios/{username}/amigos/{uuid}")
     public Response borrarAmigo (@PathParam("username")String username, @PathParam("uuid")String uuid) {
         Optional<User_friend> user_friend_db = userFriendservice.borrarAmigo(username,uuid);
         Response response;
