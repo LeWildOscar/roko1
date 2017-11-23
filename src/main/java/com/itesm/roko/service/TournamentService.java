@@ -1,11 +1,13 @@
 package com.itesm.roko.service;
 
 import com.itesm.roko.dao.TournamentDAO;
+import com.itesm.roko.dao.UserDAO;
 import com.itesm.roko.dao.tournament_matchday.TournamentMatchDayDAOImpl;
 import com.itesm.roko.dao.tournament_user.Tournament_userDAOImpl;
 import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_matchday;
 import com.itesm.roko.domain.Tournament_user;
+import com.itesm.roko.domain.User;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,16 @@ public class TournamentService {
     private Tournament_userDAOImpl tournament_userDAOImpl;
     @Autowired
     private TournamentMatchDayDAOImpl tournamentMatchDayDAO;
+    @Autowired
+    private UserDAO userDAO;
+
 
     public Optional<Tournament>insert(Tournament tournament){
         Optional<Tournament>tournament1 = tournamentDAO.insert(tournament);
         System.out.println("torneos jot");
         Tournament_user tournament_user = new Tournament_user();
-        tournament_user.setUser_id(tournament.getUser_id());
+        User user = userDAO.getByUsername(tournament.getUsername()).get();
+        tournament_user.setUser_id(user.getId());
         tournament_user.setIs_winner(0);
         tournament_user.setIs_admin(1);
         tournament_user.setPosition(1);
