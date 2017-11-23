@@ -59,9 +59,10 @@ public class TournamentMatchDayDAOImpl implements SqlTournamentMatchdayDAO {
     public Optional<Tournament_matchday> insert(Tournament_matchday tournament_matchday){
         String newUuid = UUID.randomUUID().toString();
         try{
+
             jdbcTemplate.update(
-                    "INSERT INTO tournament_matchday(id, uuid, start_date, end_date, number, on_created, on_updated, tournament_id) " +
-                            "VALUES (?,?,?,?,?,?,?,?)", newUuid, tournament_matchday.getStart_date(), tournament_matchday.getEnd_date(),
+                    "INSERT INTO tournament_matchday(uuid, start_date, end_date, number, on_created, on_updated, tournament_id) " +
+                            "VALUES (?,?,?,?,?,?,?)", newUuid, tournament_matchday.getStart_date(), tournament_matchday.getEnd_date(),
                     tournament_matchday.getNumber(), tournament_matchday.getOn_created(), tournament_matchday.getOn_updated(),
                     tournament_matchday.getTournament_id()
             );
