@@ -74,7 +74,7 @@ public class TournamentDAO {
     }
 
     public Optional<List<Tournament>>list(){
-        String sql = "SELECT * FROM tournament";
+        String sql = "SELECT * FROM tournament ORDER BY pot DESC ";
         try{
             List<Tournament>tournaments= jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Tournament.class));

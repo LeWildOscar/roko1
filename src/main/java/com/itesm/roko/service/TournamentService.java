@@ -33,6 +33,7 @@ public class TournamentService {
         System.out.println("torneos jot");
         Tournament_user tournament_user = new Tournament_user();
         User user = userDAO.getByUsername(tournament.getUsername()).get();
+
         tournament_user.setUser_id(user.getId());
         tournament_user.setIs_winner(0);
         tournament_user.setIs_admin(1);
