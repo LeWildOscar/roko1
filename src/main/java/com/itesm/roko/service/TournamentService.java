@@ -29,11 +29,19 @@ public class TournamentService {
 
 
     public Optional<Tournament>insert(Tournament tournament){
+        //sólo recibe nombre, precio entrada, descripcion
+        tournament.setIs_public(0);
+        tournament.setLevel(1);
+        tournament.setMax_users(10);
+        tournament.setMin_users(1);
+        tournament.setPot(0);
+        tournament.setPrize_spread(1);
+
         Optional<Tournament>tournament1 = tournamentDAO.insert(tournament);
         System.out.println("torneos jot");
         Tournament_user tournament_user = new Tournament_user();
         User user = userDAO.getByUsername(tournament.getUsername()).get();
-
+        //nombre, precui, desc
         tournament_user.setUser_id(user.getId());
         tournament_user.setIs_winner(0);
         tournament_user.setIs_admin(1);
@@ -59,7 +67,10 @@ public class TournamentService {
     }
 
     public Optional<Tournament>getByPublicIdentifier(String public_identifier){
-        return tournamentDAO.getByPublicIdentifier(public_identifier);
+        Optional<Tournament> tournament = tournamentDAO.getByPublicIdentifier(public_identifier);
+        Optional<Tournament_matchday> tournament_matchday= tournamentMatchDayDAO.getByTournament_id(""+tournament.get().getId());
+        tournament.get().setTournament_matchday_id(""+tournament_matchday.get().getId());
+        return tournament;
     }
 
 

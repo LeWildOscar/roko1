@@ -57,6 +57,7 @@ public class TournamentDAO {
         String newUuid = UUID.randomUUID().toString();
         Random rnd = new Random();
         int public_identifier = 1000 + rnd.nextInt(9000);
+        System.out.println("A punto de insertar torneo");
         try{
             jdbcTemplate.update(
                     "INSERT INTO tournament(uuid, is_public, date_start, date_end, pot, fee, level, prize_spread, max_users, min_users, description, name, " +
@@ -66,6 +67,7 @@ public class TournamentDAO {
                     tournament.getMin_users(), tournament.getDescription(), tournament.getName(), tournament.getPassword(), public_identifier,
                     tournament.getOn_created(), tournament.getOn_updates(), 1
             );
+            System.out.println("Acabó de insertar toneo jot");
             return getByUuid(newUuid);
         }catch (Exception e){
             e.printStackTrace();

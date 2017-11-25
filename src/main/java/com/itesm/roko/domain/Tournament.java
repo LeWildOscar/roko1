@@ -47,6 +47,16 @@ public class Tournament {
 
     private String username;
 
+    private String tournament_matchday_id;
+
+    public String getTournament_matchday_id() {
+        return tournament_matchday_id;
+    }
+
+    public void setTournament_matchday_id(String tournament_matchday_id) {
+        this.tournament_matchday_id = tournament_matchday_id;
+    }
+
     public String getUsername() {
         return username;
     }

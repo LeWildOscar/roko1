@@ -1,5 +1,7 @@
 package com.itesm.roko.dao.tournament_matchday;
 
+import com.itesm.roko.domain.Match;
+import com.itesm.roko.domain.Matchday_match;
 import com.itesm.roko.domain.Tournament_matchday;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public interface SqlTournamentMatchdayDAO {
     Optional<Tournament_matchday> update (Tournament_matchday tournament_matchday);
     Optional<Tournament_matchday> delete (Tournament_matchday tournament_matchday);
     Optional<Tournament_matchday> getByTournament_id (String tournament_id);
+    Optional<List<Tournament_matchday>> tournamentMatchdays (String tournament_id);
+    Optional<List<Match>> matchday_matches (String tournament_matchday_id);
 
 
 

@@ -1,6 +1,11 @@
 package com.itesm.roko.dao.tournament_matchday;
 
+import com.itesm.roko.dao.UserDAO;
+import com.itesm.roko.domain.Match;
+import com.itesm.roko.domain.Matchday_match;
 import com.itesm.roko.domain.Tournament_matchday;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +21,9 @@ public class TournamentMatchDayDAOImpl implements SqlTournamentMatchdayDAO {
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(TournamentMatchDayDAOImpl.class);
+
 
     @Override
     public Optional<Tournament_matchday> getTournamentMatchdayByUuid (String uuid) {
@@ -113,4 +121,50 @@ public class TournamentMatchDayDAOImpl implements SqlTournamentMatchdayDAO {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<List<Tournament_matchday>>tournamentMatchdays(String tournament_id){
+        String sql = "SELECT * FROM tournament_matchday where tournament_id=?";
+        try{
+            List<Tournament_matchday>tournament_matchdays= jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Tournament_matchday.class), tournament_id);
+            logger.debug("Jalando lista de jornadas del torneo");
+            return Optional.of(tournament_matchdays);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug("No habia nada alv");
+
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<List<Match>>matchday_matches(String tournament_matchday_id){
+        String sql = "select * \n" +
+                "from mydb.match \n" +
+                "where id IN ( \n" +
+                "\tselect matchday_match.match_id \n" +
+                "    from tournament_matchday  join matchday_match \n" +
+                "    on tournament_matchday.id = matchday_match.tournament_matchday_id \n" +
+                "    where tournament_matchday.id = ?);";
+        try{
+            List<Match>matches= jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Match.class), tournament_matchday_id);
+            logger.debug("Jalando lista de partidos de la jornada");
+            return Optional.of(matches);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.debug("No habia nada alv");
+
+        }
+        return Optional.empty();
+    }
+
+
+
+
+
+
+
+
 }
