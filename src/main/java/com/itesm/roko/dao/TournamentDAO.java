@@ -1,6 +1,7 @@
 package com.itesm.roko.dao;
 
 import com.itesm.roko.domain.Match;
+import com.itesm.roko.domain.User;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,9 @@ public class TournamentDAO {
         }
         return Optional.empty();
     }
+    /*public Optional<List<User>>tournamentUsers(String tournament_id){
+        String sql = ""
+    }*/
 
 
 

@@ -82,8 +82,7 @@ public class TournamentUserEndpoint {
         return response;
     }
 
-
-
+    /*
 
     @GET
     @Path("/usuarios/{username}/torneo/{uuid}")
@@ -117,6 +116,7 @@ public class TournamentUserEndpoint {
         }
         return response;
     }
+    */
 
     @DELETE
     @Path("/usuarios/{username}/torneo/{uuid}")
