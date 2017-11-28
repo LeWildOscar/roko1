@@ -4,6 +4,8 @@ package com.itesm.roko.endpoint;
 
 import com.itesm.roko.domain.Tournament;
 import com.itesm.roko.domain.Tournament_user;
+import com.itesm.roko.domain.User;
+import com.itesm.roko.service.TournamentService;
 import com.itesm.roko.service.Tournament_userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,8 +26,29 @@ public class TournamentUserEndpoint {
     @Autowired
     private Tournament_userService tournament_userService;
 
+    @Autowired
+    private TournamentService tournamentService;
 
 
+
+
+    /**
+     *
+     * Agrega a un torneo existente un usuario existente
+     * return: un objeto tournament_user
+     * */
+    @GET
+    @Path("/torneos/{tournament_id}/usuarios")
+    public Response getTournamentUsers(@PathParam("tournament_id") String tournament_id) {
+        Optional<List<User>> users = tournamentService.getTournamentUsers(tournament_id);
+        Response response;
+        if (users.isPresent()) {
+            response = Response.ok(users.get()).build();
+        } else {
+            response = Response.noContent().build();
+        }
+        return response;
+    }
     /**
      *
      * Agrega a un torneo existente un usuario existente
@@ -34,7 +57,6 @@ public class TournamentUserEndpoint {
     @POST
     @Path("/torneos/usuarios")
     public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user) {
-        System.out.println(tournament_user.getTournament_id());
         Optional<Tournament_user> tournament_user_response = tournament_userService.insert(tournament_user);
         Response response;
         if (tournament_user_response.isPresent()) {
@@ -54,7 +76,7 @@ public class TournamentUserEndpoint {
      *
      * return: List<Tournament>
      * */
-
+    /*
     @GET
     @Path("/usuarios/{username}/torneos")
     public Response getTorneosParticipaUsuario (@PathParam("username")String username) {
@@ -68,6 +90,7 @@ public class TournamentUserEndpoint {
 
         return response;
     }
+    */
 
     @GET
     @Path("/usuarios/{username}/torneos/admin")

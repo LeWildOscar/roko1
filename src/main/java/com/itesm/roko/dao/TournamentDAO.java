@@ -94,6 +94,27 @@ public class TournamentDAO {
         String sql = ""
     }*/
 
+    public Optional<List<User>>getTournamentUsers(String tournament_id){
+        String sql = "select * \n" +
+                "from mydb.user \n" +
+                "where id IN ( \n" +
+                "\tselect tournament_user.user_id \n" +
+                "    from tournament  join tournament_user \n" +
+                "    on tournament.id = tournament_user.tournament_id \n" +
+                "    where tournament.id = ?);";
+        try{
+            List<User>users= jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(User.class),tournament_id);
+            logger.debug("Jalando lista de usuarios del torneo");
+            return Optional.of(users);
+        }catch (EmptyResultDataAccessException e){
+            e.printStackTrace();
+            logger.debug("No habia nada alv");
+
+        }
+        return Optional.empty();
+    }
+
 
 
 }

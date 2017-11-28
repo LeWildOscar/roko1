@@ -73,5 +73,9 @@ public class TournamentService {
         return tournament;
     }
 
+    public Optional<List<User>> getTournamentUsers(String tournament){
+        return tournamentDAO.getTournamentUsers(tournament);
+    }
+
 
 }
