@@ -32,9 +32,10 @@ public class TournamentUserEndpoint {
      * return: un objeto tournament_user
      * */
     @POST
-    @Path("/usuarios/{username}/torneo")
-    public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user, @PathParam("username") String username) {
-        Optional<Tournament_user> tournament_user_response = tournament_userService.insert(tournament_user,username);
+    @Path("/torneos/usuarios")
+    public Response agregarTorneoUsuario(@RequestBody Tournament_user tournament_user) {
+        System.out.println(tournament_user.getTournament_id());
+        Optional<Tournament_user> tournament_user_response = tournament_userService.insert(tournament_user);
         Response response;
         if (tournament_user_response.isPresent()) {
             response = Response.ok(tournament_user_response.get()).build();

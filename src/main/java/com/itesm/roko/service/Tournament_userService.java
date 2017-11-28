@@ -19,9 +19,8 @@ public class Tournament_userService {
     @Autowired
     private UserDAO usuarioDAO;
 
-    public Optional<Tournament_user> insert (Tournament_user tournament_user,String username) {
-        User user = usuarioDAO.getByUsername(username).get();
-        tournament_user.setUser_id(user.getId());
+    public Optional<Tournament_user> insert (Tournament_user tournament_user) {
+
         return tournament_userDAOImpl.insert(tournament_user);
     }
 
